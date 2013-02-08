@@ -693,6 +693,22 @@ void hdmi_tvenc_set(Hdmi_tx_video_para_t *param)
          SOF_LINES           =36;             
          TOTAL_FRAMES        =4;              
     }
+    else if(param->VIC==HDMI_1080p24) {
+         INTERLACE_MODE      =0;              
+         PIXEL_REPEAT_VENC   =0;              
+         PIXEL_REPEAT_HDMI   =0;              
+         ACTIVE_PIXELS       =(1920*(1+PIXEL_REPEAT_HDMI)); // Number of active pixels per line.
+         ACTIVE_LINES        =(1080/(1+INTERLACE_MODE));    // Number of active lines per field.
+         LINES_F0            =1125;           
+         LINES_F1            =1125;           
+         FRONT_PORCH         =638;             
+         HSYNC_PIXELS        =44;             
+         BACK_PORCH          =148;            
+         EOF_LINES           =4;              
+         VSYNC_LINES         =5;              
+         SOF_LINES           =36;             
+         TOTAL_FRAMES        =4;              
+    }
     else{ //HDMI_1080p60, HDMI_1080p30
          INTERLACE_MODE      =0;              
          PIXEL_REPEAT_VENC   =0;              
