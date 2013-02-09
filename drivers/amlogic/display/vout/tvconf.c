@@ -207,7 +207,7 @@ static const vinfo_t tv_info[] =
         .sync_duration_den = 1,
     },
     { /* VMODE_1080P_24HZ */
-        .name              = "1080p24",
+        .name              = "1080p24hz",
         .mode              = VMODE_1080P_24HZ,
         .width             = 1920,
         .height            = 1080,
