@@ -649,6 +649,75 @@ static const reg_t tvregs_1080p_50hz[] = {
     {MREG_END_MARKER,            0      }
 };
 
+static const reg_t tvregs_1080p_24hz[] = {
+    {VENC_VDAC_SETTING,          0xff,  },
+//	{VCLK_HD},
+	{HHI_VID_CLK_DIV,			 1		},
+    {HHI_VID_CLK_CNTL,        	 0x0421,},
+    {ENCP_VIDEO_FILT_CTRL,       0x1052,},
+
+    // bit 13    1          (delayed prog_vs)
+    // bit 5:4:  2          (pixel[0])
+    // bit 3:    1          invert vsync or not
+    // bit 2:    1          invert hsync or not
+    // bit1:     1          (select viu sync)
+    // bit0:     1          (progressive)
+    {VENC_DVI_SETTING,           0x000d,},
+    {ENCP_VIDEO_MAX_PXCNT,       2639,  },
+    {ENCP_VIDEO_MAX_LNCNT,       1124,  },
+    /* horizontal timing settings */
+    {ENCP_VIDEO_HSPULS_BEGIN,    44,  },//1980
+    {ENCP_VIDEO_HSPULS_END,      132,    },
+    {ENCP_VIDEO_HSPULS_SWITCH,   44,    },
+
+    //DE position in horizontal
+    {ENCP_VIDEO_HAVON_BEGIN,     271,   },
+    {ENCP_VIDEO_HAVON_END,       2190,  },
+
+    //ditital hsync positon in horizontal
+    {ENCP_VIDEO_HSO_BEGIN,       79 ,    },
+    {ENCP_VIDEO_HSO_END,         123,  },
+
+    /* vsync horizontal timing */
+    {ENCP_VIDEO_VSPULS_BEGIN,    220,   },
+    {ENCP_VIDEO_VSPULS_END,      2140,  },
+
+    /* vertical timing settings */
+    {ENCP_VIDEO_VSPULS_BLINE,    0,     },
+    {ENCP_VIDEO_VSPULS_ELINE,    4,     },//35
+    {ENCP_VIDEO_EQPULS_BLINE,    0,     },
+    {ENCP_VIDEO_EQPULS_ELINE,    4,     },//35
+    {ENCP_VIDEO_VAVON_BLINE,     41,    },
+    {ENCP_VIDEO_VAVON_ELINE,     1120,  },
+
+    //adjust the hsync & vsync start point and end point
+    {ENCP_VIDEO_VSO_BEGIN,       79,  },
+    {ENCP_VIDEO_VSO_END,         79,  },
+
+    //adjust the vsync start line and end line
+    {ENCP_VIDEO_VSO_BLINE,       0,     },
+    {ENCP_VIDEO_VSO_ELINE,       5,     },
+
+    {ENCP_VIDEO_YFP1_HTIME,      271,   },
+    {ENCP_VIDEO_YFP2_HTIME,      2190,  },
+    {VENC_VIDEO_PROG_MODE,       0x100, },
+    {ENCP_VIDEO_MODE,            0x0040,},
+    {ENCP_VIDEO_MODE_ADV,        0x0018,},
+
+    {ENCP_VIDEO_SYNC_MODE,       0x7, }, //bit[15:8] -- adjust the vsync vertical position
+
+    {ENCP_VIDEO_YC_DLY,          0,     },      //Y/Cb/Cr delay
+
+    {ENCP_VIDEO_RGB_CTRL, 2,},       // enable sync on B
+
+    {VENC_SYNC_ROUTE,            0,     },
+    {VENC_INTCTRL,               0x200, },
+    {VFIFO2VD_CTL,               0,     },
+    {VENC_VDAC_SETTING,          0,     },
+    {ENCI_VIDEO_EN,              0,     },
+    {ENCP_VIDEO_EN,              1,     },
+    {MREG_END_MARKER,            0      }
+};
 
 /* The sequence of register tables items must match the enum define in tvmode.h */
 static const reg_t *tvregsTab[] = {
@@ -664,6 +733,7 @@ static const reg_t *tvregsTab[] = {
     tvregs_720p_50hz,
     tvregs_1080i_50hz,
     tvregs_1080p_50hz,
+    tvregs_1080p_24hz,
 };
 
 static const tvinfo_t tvinfoTab[] = {
@@ -678,7 +748,8 @@ static const tvinfo_t tvinfoTab[] = {
     {.xres = 1920, .yres = 1080, .id = "1080p"},
     {.xres = 1280, .yres =  720, .id = "720p50hz"},     //Adjust table sequences and match the enum define in tvmode.h
     {.xres = 1920, .yres = 1080, .id = "1080i50hz"},
-    {.xres = 1920, .yres = 1080, .id = "1080p50hz"}
+    {.xres = 1920, .yres = 1080, .id = "1080p50hz"},
+    {.xres = 1920, .yres = 1080, .id = "1080p24hz"}
 };
 
 static inline void setreg(const reg_t *r)

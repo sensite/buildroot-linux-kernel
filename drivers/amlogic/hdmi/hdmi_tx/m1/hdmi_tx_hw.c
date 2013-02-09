@@ -986,6 +986,7 @@ void hdmi_hw_set_powermode( int power_mode, int vic)
                     break;
                 case HDMI_1080p60:
                 case HDMI_1080p50:
+                case HDMI_1080p24:
                     hdmi_wr_reg(TX_SYS1_AFE_TEST, 0x1f);     //0x17
                     hdmi_wr_reg(TX_CORE_CALIB_VALUE, 0x9);   //0xf7
                     hdmi_wr_reg(TX_SYS1_AFE_RESET, 0x2);     //0x16   //Def.
