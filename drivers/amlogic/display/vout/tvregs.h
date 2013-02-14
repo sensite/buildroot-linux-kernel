@@ -664,36 +664,37 @@ static const reg_t tvregs_1080p_24hz[] = {
     {ENCP_VIDEO_MAX_PXCNT,       2749,  },
     {ENCP_VIDEO_MAX_LNCNT,       1124,  },
     /* horizontal timing settings */
-    {ENCP_VIDEO_HSPULS_BEGIN,    44,  },//2156->44,1980
-    {ENCP_VIDEO_HSPULS_END,      132,    },//44->132
+    {ENCP_VIDEO_HSPULS_BEGIN,    44,  	},//2156->44,1980
+    {ENCP_VIDEO_HSPULS_END,      132,   },//44->132
     {ENCP_VIDEO_HSPULS_SWITCH,   44,    },
-
     {ENCP_VIDEO_HAVON_BEGIN,     271,   },
     {ENCP_VIDEO_HAVON_END,       2190,  },
     /*hsync in horizontal*/
     {ENCP_VIDEO_HSO_BEGIN,       79,    },
-    {ENCP_VIDEO_HSO_END,         123,  },
+    {ENCP_VIDEO_HSO_END,         123,  	},
     /*ivsync horizontal*/
     {ENCP_VIDEO_VSPULS_BEGIN,    220,   },
     {ENCP_VIDEO_VSPULS_END,      2140,  },
     /*vertical timing*/
     {ENCP_VIDEO_VSPULS_BLINE,    0,     },
     {ENCP_VIDEO_VSPULS_ELINE,    4,     },//35
-
+    {ENCP_VIDEO_EQPULS_BLINE,    0,     },
+    {ENCP_VIDEO_EQPULS_ELINE,    4,     },//35
     {ENCP_VIDEO_VAVON_BLINE,     41,    },
     {ENCP_VIDEO_VAVON_ELINE,     1120,  },
     //adjust hsync and vsync start point and end point
-    {ENCP_VIDEO_VSO_BEGIN,       79,  }, //2100 -> 79
-    {ENCP_VIDEO_VSO_END,         79,  }, //2164 -> 79
-
+    {ENCP_VIDEO_VSO_BEGIN,       79,  	}, //2100 -> 79
+    {ENCP_VIDEO_VSO_END,         79,  	}, //2164 -> 79
     {ENCP_VIDEO_VSO_BLINE,       0,     },
     {ENCP_VIDEO_VSO_ELINE,       5,     },
-
     {ENCP_VIDEO_YFP1_HTIME,      271,   },
     {ENCP_VIDEO_YFP2_HTIME,      2190,  },
     {VENC_VIDEO_PROG_MODE,       0x100, },
     {ENCP_VIDEO_MODE,            0x0040,},
     {ENCP_VIDEO_MODE_ADV,        0x0018,},
+    {ENCP_VIDEO_SYNC_MODE,       0x7, 	}, //bit[15:8] -- adjust the vsync vertical position
+    {ENCP_VIDEO_YC_DLY,          0,     },      //Y/Cb/Cr delay
+    {ENCP_VIDEO_RGB_CTRL, 	 2,	},       // enable sync on B
 
     {ENCP_VIDEO_SY_VAL,          8,     },
     {ENCP_VIDEO_SY2_VAL,         0x1d8, },
