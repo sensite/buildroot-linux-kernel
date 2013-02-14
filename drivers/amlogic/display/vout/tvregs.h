@@ -661,8 +661,8 @@ static const reg_t tvregs_1080p_24hz[] = {
     // bit1:     1          (select viu sync)
     // bit0:     1          (progressive)
     {VENC_DVI_SETTING,           0x000d,},//just progressive
-    {ENCP_VIDEO_MAX_PXCNT,       2749,  },
-    {ENCP_VIDEO_MAX_LNCNT,       1124,  },
+    {ENCP_VIDEO_MAX_PXCNT,       2749,  }, //1920 clocks + 830
+    {ENCP_VIDEO_MAX_LNCNT,       1124,  }, //1080 active verticle + 45 verticle blanking lines 0 based
     /* horizontal timing settings */
     {ENCP_VIDEO_HSPULS_BEGIN,    44,  	},//2156->44,1980
     {ENCP_VIDEO_HSPULS_END,      132,   },//44->132
