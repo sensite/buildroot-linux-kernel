@@ -966,10 +966,37 @@ static void phy_pll_off(void)
 /**/
 void hdmi_hw_set_powermode( int power_mode, int vic)
 {
+// Default Setting
+
+    switch(vic) {
+        case HDMI_480i60:
+        case HDMI_480i60_16x9:
+        case HDMI_576p50:
+        case HDMI_576p50_16x9:
+        case HDMI_576i50:
+        case HDMI_576i50_16x9:            
+        case HDMI_480p60:
+        case HDMI_480p60_16x9:
+            hdmi_wr_reg(0x016, 0x30);
+            break;
+        case HDMI_720p50:
+        case HDMI_720p60:
+        case HDMI_1080i50:
+        case HDMI_1080i60:
+        case HDMI_1080p24://1080p24 support
+            hdmi_wr_reg(0x016, 0x40);
+            break;
+        case HDMI_1080p50:
+        case HDMI_1080p60:
+            hdmi_wr_reg(0x016, 0x40);
+            break;
+        default:
+            break;
+    }
     switch(power_mode){
         case 1:
-            hdmi_wr_reg(0x016, 0x02);
-            hdmi_wr_reg(0x014, 0x02);  
+//            hdmi_wr_reg(0x016, 0x02);
+//            hdmi_wr_reg(0x014, 0x02);  
 
             hdmi_wr_reg(TX_CORE_CALIB_MODE, 0xc);
             hdmi_wr_reg(TX_CORE_CALIB_VALUE, 0x0);
@@ -986,7 +1013,6 @@ void hdmi_hw_set_powermode( int power_mode, int vic)
                     break;
                 case HDMI_1080p60:
                 case HDMI_1080p50:
-                case HDMI_1080p24:
                     hdmi_wr_reg(TX_SYS1_AFE_TEST, 0x1f);     //0x17
                     hdmi_wr_reg(TX_CORE_CALIB_VALUE, 0x9);   //0xf7
                     hdmi_wr_reg(TX_SYS1_AFE_RESET, 0x2);     //0x16   //Def.
@@ -1001,10 +1027,6 @@ void hdmi_hw_set_powermode( int power_mode, int vic)
                     hdmi_wr_reg(TX_SYS1_BIAS, 0x0);         //0x15
                     break;
             }
-#ifdef MORE_LOW_P
-            hdmi_wr_reg(0x010, 0x0);
-            hdmi_wr_reg(0x01a, 0x3);
-#endif        
             break;
         case 2:
             hdmi_wr_reg(0x017, 0x1f);
@@ -1022,10 +1044,6 @@ void hdmi_hw_set_powermode( int power_mode, int vic)
             hdmi_wr_reg(0x016, 0x03); //hdmi_wr_reg(0x016, 0x04);   // Bit[3:0] is HDMI-PHY's output swing control register
             hdmi_wr_reg(TX_CORE_CALIB_MODE, 0x8);
             hdmi_wr_reg(TX_CORE_CALIB_VALUE, 0xf);
-#ifdef MORE_LOW_P
-            hdmi_wr_reg(0x010, 0x3);
-            hdmi_wr_reg(0x01a, 0xfb);
-#endif            
             break;
     }
 }

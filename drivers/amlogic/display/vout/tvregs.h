@@ -651,8 +651,22 @@ static const reg_t tvregs_1080p_50hz[] = {
 
 static const reg_t tvregs_1080p_24hz[] = {
     {VENC_VDAC_SETTING,          0xff,  },
+/* new code*/
+{HHI_VID_CLK_CNTL, 0x0,},
+{HHI_VID_PLL_CNTL2, 0x814d3928},
+{HHI_VID_PLL_CNTL3, 0x6b425012},
+{HHI_VID_PLL_CNTL4, 0x110}, //unknown define
+{HHI_VID_PLL_CNTL, 0x0001043e,},
+{HHI_VID_DIVIDER_CNTL, 0x00010843,}, //unknown define
+/*end new*/
     {HHI_VID_CLK_DIV,            0x100  },
-    {HHI_VID_CLK_CNTL,           0x0421,},
+/*new code*/
+{HHI_VID_CLK_CNTL, 0x80000,},
+{HHI_VID_CLK_CNTL, 0x88001,},
+{HHI_VID_CLK_CNTL, 0x80003,},
+{HHI_VIID_CLK_DIV, 0x00000101,}, //unknown define
+/*new code*/
+    {HHI_VID_CLK_CNTL,           0x0421,}, //old m1
     {ENCP_VIDEO_FILT_CTRL,       0x1052,},
     // bit 13    1          (delayed prog_vs)
     // bit 5:4:  2          (pixel[0])
@@ -695,13 +709,29 @@ static const reg_t tvregs_1080p_24hz[] = {
     {ENCP_VIDEO_SYNC_MODE,       0x7, 	}, //bit[15:8] -- adjust the vsync vertical position
     {ENCP_VIDEO_YC_DLY,          0,     },      //Y/Cb/Cr delay
     {ENCP_VIDEO_RGB_CTRL, 	 2,	},       // enable sync on B
-
+//old but not in new
     {ENCP_VIDEO_SY_VAL,          8,     },
     {ENCP_VIDEO_SY2_VAL,         0x1d8, },
+//end
     {VENC_SYNC_ROUTE,            0,     },
     {VENC_INTCTRL,               0x200, },
     {VFIFO2VD_CTL,               0,     },
+//new
+{VENC_VDAC_FIFO_CTRL,        0x1000,}, //unknown define
+//end
     {VENC_VDAC_SETTING,          0,     },
+//new
+{VPU_VIU_VENC_MUX_CTRL, 0x000a,}, //unknown define
+{ENCP_DACSEL_0, 0x3102,}, //unknown define
+{ENCP_DACSEL_1, 0x0054,}, //ukknown define
+/* new */
+{VENC_VDAC_DACSEL0, 0x0001,},
+{VENC_VDAC_DACSEL1, 0x0001,},
+{VENC_VDAC_DACSEL2, 0x0001,},
+{VENC_VDAC_DACSEL3, 0x0001,},
+{VENC_VDAC_DACSEL4, 0x0001,},
+{VENC_VDAC_DACSEL5, 0x0001,},
+//end
     {ENCI_VIDEO_EN,              0,     },
     {ENCP_VIDEO_EN,              1,     },
     {MREG_END_MARKER,            0      }

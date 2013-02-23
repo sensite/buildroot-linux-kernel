@@ -251,7 +251,7 @@ int tvoutc_setmode(tvmode_t mode)
 			
     while (MREG_END_MARKER != s->reg)
         setreg(s++);
-	tvoutc_setclk(mode);
+    tvoutc_setclk(mode);
     enable_vsync_interrupt();
     
     WRITE_MPEG_REG(VPP_POSTBLEND_H_SIZE, tvinfoTab[mode].xres);
